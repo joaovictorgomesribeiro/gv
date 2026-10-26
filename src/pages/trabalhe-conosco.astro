@@ -1,0 +1,31 @@
+---
+import WhatsAppCTA from "../components/WhatsAppCTA.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title="Trabalhe Conosco | GV Soluções Empresariais"
+	description="Envie seu currículo para a GV Soluções Empresariais pelo WhatsApp e participe dos processos seletivos da empresa em Uberlândia e região."
+>
+	<section class="trabalhe-conosco">
+		<h1>Trabalhe Conosco</h1>
+		<p>
+			Quer fazer parte do time da GV? Envie seu currículo pelo WhatsApp informando a
+			vaga ou área de interesse. Esse canal é separado do contato comercial, para que
+			seu currículo não se perca.
+		</p>
+
+		<WhatsAppCTA
+			message="Olá, gostaria de enviar meu currículo para o setor de Trabalhe Conosco. Segue em anexo."
+			label="Enviar currículo pelo WhatsApp"
+		/>
+	</section>
+</BaseLayout>
+
+<style>
+	.trabalhe-conosco {
+		max-width: 700px;
+		margin: 0 auto;
+		padding: 3rem 1.25rem;
+	}
+</style>

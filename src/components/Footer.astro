@@ -1,0 +1,95 @@
+---
+import { navItems } from "../data/nav";
+import { address, siteName, social } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="footer-grid">
+		<div>
+			<p class="footer-brand">{siteName}</p>
+			<p>FOCO NA QUALIDADE: a GV é especialista naquilo que se propõe a fazer.</p>
+		</div>
+
+		<nav aria-label="Links do rodapé">
+			<ul>
+				{
+					navItems.map((item) => (
+						<li>
+							<a href={item.href}>{item.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<div>
+			<p>{address.full}</p>
+			<ul class="social-links">
+				<li><a href={social.facebook} target="_blank" rel="noopener noreferrer">Facebook</a></li>
+				<li><a href={social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
+				<li><a href={social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<p class="copyright">
+		© {siteName} {year}. Todos os direitos reservados.
+	</p>
+</footer>
+
+<style>
+	.site-footer {
+		background-color: #0b3d24;
+		color: #f2f2f2;
+		padding: 2.5rem 1.25rem 1.5rem;
+	}
+
+	.footer-grid {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 700px) {
+		.footer-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.footer-brand {
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+	}
+
+	.site-footer nav ul,
+	.social-links {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.site-footer a {
+		color: #f2f2f2;
+		text-decoration: underline;
+	}
+
+	.site-footer a:hover,
+	.site-footer a:focus-visible {
+		color: #ffffff;
+	}
+
+	.copyright {
+		max-width: 1200px;
+		margin: 2rem auto 0;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.15);
+		font-size: 0.875rem;
+	}
+</style>

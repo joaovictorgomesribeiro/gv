@@ -1,0 +1,130 @@
+---
+import WhatsAppCTA from "../components/WhatsAppCTA.astro";
+import { address } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const valores = [
+	{
+		title: "Ética",
+		description:
+			"Agir dentro das normas de boa conduta com clientes, parceiros e colaboradores.",
+	},
+	{
+		title: "Excelência",
+		description: "Prestar serviço com agilidade e alta qualidade.",
+	},
+	{
+		title: "Respeito às pessoas",
+		description: "Comprometimento e empatia no dia a dia.",
+	},
+];
+---
+
+<BaseLayout
+	title="Sobre a GV Soluções Empresariais"
+	description="Conheça a missão, a visão e os valores da GV Soluções Empresariais, empresa de terceirização sediada em Uberlândia-MG."
+>
+	<section class="intro">
+		<h1>Sobre a GV Soluções Empresariais</h1>
+		<p>
+			Atuando desde 2015, somos especialistas em levar a solução completa para a sua
+			empresa através da terceirização de logística interna, produção e serviços
+			administrativos.
+		</p>
+	</section>
+
+	<section class="cultura">
+		<div>
+			<h2>Missão</h2>
+			<p>
+				Nosso compromisso vai muito além da terceirização de profissionais: buscamos
+				entregar boas soluções às áreas onde nossos colaboradores atuam, de forma ética
+				e legal.
+			</p>
+		</div>
+		<div>
+			<h2>Visão</h2>
+			<p>
+				Ser referência no nosso mercado, reconhecida por soluções inovadoras, qualidade
+				e por superar as expectativas dos clientes.
+			</p>
+		</div>
+	</section>
+
+	<section class="valores">
+		<h2>Valores</h2>
+		<ul class="card-grid">
+			{
+				valores.map((valor) => (
+					<li class="card">
+						<h3>{valor.title}</h3>
+						<p>{valor.description}</p>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="onde-estamos">
+		<h2>Onde estamos</h2>
+		<p>
+			Sede em Uberlândia-MG. Atuamos no interior de São Paulo, Minas Gerais e Goiás,
+			além da região do Triângulo Mineiro, com abertura para avaliar novas cidades.
+		</p>
+		<address>{address.full}</address>
+		<WhatsAppCTA
+			message="Olá, gostaria de falar com a GV Soluções Empresariais."
+			label="Falar pelo WhatsApp"
+		/>
+	</section>
+</BaseLayout>
+
+<style>
+	section {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 3rem 1.25rem;
+	}
+
+	.cultura {
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 700px) {
+		.cultura {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	.card-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 1.25rem;
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 700px) {
+		.card-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.card {
+		border: 1px solid #e2e2e2;
+		border-radius: 0.75rem;
+		padding: 1.25rem;
+	}
+
+	.card h3 {
+		margin-top: 0;
+	}
+
+	.onde-estamos address {
+		font-style: normal;
+		margin: 1rem 0 1.5rem;
+	}
+</style>

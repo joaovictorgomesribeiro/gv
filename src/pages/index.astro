@@ -1,16 +1,251 @@
 ---
+import WhatsAppCTA from "../components/WhatsAppCTA.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const servicos = [
+	{
+		title: "Contratação de talentos inteligentes em tempo hábil",
+		description:
+			"Recrutamento e seleção para atender ao cronograma do cliente, sem atrasar a operação.",
+	},
+	{
+		title: "Integração à cultura da empresa",
+		description:
+			"Onboarding alinhado à cultura, aos processos e aos sistemas do cliente.",
+	},
+	{
+		title: "Treinamento e qualificação da equipe",
+		description:
+			"Capacitação contínua de líderes, técnicos, assistentes e auxiliares.",
+	},
+	{
+		title: "Acompanhamento na execução das atividades",
+		description:
+			"Gestão próxima, comparação de desempenho e identificação de necessidades de treinamento.",
+	},
+	{
+		title: "Sistema de backup",
+		description: "Substituto preparado para cobrir ausências sem impacto na operação.",
+	},
+	{
+		title: "Gestão da folha de pagamento e exames médicos",
+		description:
+			"Folha, encargos trabalhistas, controle de férias e exames admissionais e periódicos.",
+	},
+	{
+		title: "Gestão e entrega de EPIs e uniformes",
+		description: "EPIs e uniformes adequados a cada atividade e às normas vigentes.",
+	},
+	{
+		title: "Atualização das práticas de segurança para toda a empresa",
+		description: "Melhorias de segurança comunicadas e aplicadas junto ao cliente.",
+	},
+	{
+		title: "Sinergia entre a GV e a contratante",
+		description: "Operação contratada conduzida 100% pela GV, com comunicação aberta.",
+	},
+	{
+		title: "Foco no resultado do cliente",
+		description: "Resultados positivos, esforço extra e revisão flexível de processos.",
+	},
+];
+
+const setores = [
+	{
+		title: "Logística Interna",
+		items: [
+			"Carregamento e descarregamento de caminhões",
+			"Picking e conferência de pedidos",
+			"Conferência de recebimento e expedição",
+			"Processamento de pedidos",
+			"Transporte interno",
+			"Armazenagem e movimentação",
+			"Gestão de estoque",
+			"Gestão de almoxarifado e depósito",
+			"Embalagem (packing)",
+		],
+	},
+	{
+		title: "Produção",
+		items: [
+			"Gerente de produção",
+			"Operador de máquina",
+			"Operador de empilhadeira",
+			"Auxiliar de produção",
+			"Conferente de carga",
+			"Auxiliar de armazém",
+			"Apontador de produção",
+			"Supervisor de linha",
+			"Analista de PCP",
+			"Operador de movimentação e armazenagem",
+		],
+	},
+	{
+		title: "Outras Atividades",
+		items: ["Atividades administrativas", "Medicina do trabalho", "Segurança do trabalho"],
+	},
+];
+
+const beneficios = [
+	"Mantenha o foco no core business e na estratégia",
+	"Expanda o negócio de forma estruturada",
+	"Priorize a qualidade",
+	"Conte com profissionais especializados em cada etapa da operação",
+	"Controle os custos operacionais",
+	"Aumente o lucro e a produtividade",
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+	title="Terceirização de Serviços em Uberlândia | GV Soluções Empresariais"
+	description="A GV Soluções Empresariais atua desde 2015 com terceirização de logística interna, produção e serviços administrativos em Uberlândia e região."
+>
+	<section class="hero" id="home">
+		<h1>Terceirização de mão de obra em Uberlândia</h1>
+		<p>
+			Atuando desde 2015, somos especialistas em levar a solução completa para a sua
+			empresa através da terceirização de logística interna, produção e serviços
+			administrativos.
+		</p>
+		<WhatsAppCTA
+			message="Olá, gostaria de solicitar um orçamento de terceirização."
+			label="Solicitar orçamento pelo WhatsApp"
+		/>
+	</section>
+
+	<section class="sobre">
+		<h2>Entregamos as melhores soluções para o seu negócio</h2>
+		<p>
+			Atuamos para agronegócio, indústria, centros de distribuição e segmentos
+			semelhantes, com equipes para logística interna, produção, segurança e medicina
+			do trabalho.
+		</p>
+		<a href="/sobre/">Saiba mais sobre a GV</a>
+	</section>
+
+	<section class="servicos" id="servicos">
+		<h2>Serviços</h2>
+		<ul class="card-grid">
+			{
+				servicos.map((servico) => (
+					<li class="card">
+						<h3>{servico.title}</h3>
+						<p>{servico.description}</p>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="setores">
+		<h2>Setores que atuamos</h2>
+		<div class="setores-grid">
+			{
+				setores.map((setor) => (
+					<div class="setor">
+						<h3>{setor.title}</h3>
+						<ul>
+							{setor.items.map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="beneficios">
+		<h2>Benefícios da terceirização</h2>
+		<ul class="card-grid">
+			{beneficios.map((item) => <li class="card">{item}</li>)}
+		</ul>
+	</section>
+
+	<section class="portfolio" id="portfolio">
+		<h2>Portfólio</h2>
+		<p class="portfolio-pending">
+			Esta seção está em atualização: em breve traremos cases reais, números e
+			depoimentos de clientes.
+		</p>
+	</section>
+
+	<section class="cta-final">
+		<h2>Vamos começar seu projeto?</h2>
+		<WhatsAppCTA
+			message="Olá, gostaria de falar sobre um projeto de terceirização."
+			label="Entrar em contato pelo WhatsApp"
+		/>
+	</section>
+</BaseLayout>
+
+<style>
+	section {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 3rem 1.25rem;
+	}
+
+	.hero {
+		text-align: center;
+	}
+
+	.hero p {
+		max-width: 60ch;
+		margin: 1rem auto 2rem;
+	}
+
+	.card-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 1.25rem;
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 700px) {
+		.card-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1000px) {
+		.card-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.card {
+		border: 1px solid #e2e2e2;
+		border-radius: 0.75rem;
+		padding: 1.25rem;
+	}
+
+	.card h3 {
+		margin-top: 0;
+	}
+
+	.setores-grid {
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 800px) {
+		.setores-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.portfolio-pending {
+		color: #555;
+		font-style: italic;
+	}
+
+	.cta-final {
+		text-align: center;
+		background-color: #f4f8f6;
+		border-radius: 1rem;
+	}
+</style>

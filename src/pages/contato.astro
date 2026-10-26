@@ -1,0 +1,59 @@
+---
+import WhatsAppCTA from "../components/WhatsAppCTA.astro";
+import { address, social } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title="Contato | GV Soluções Empresariais"
+	description="Fale com a GV Soluções Empresariais pelo WhatsApp para solicitar orçamento de terceirização em Uberlândia e região."
+>
+	<section class="contato">
+		<h1>Canais de contato</h1>
+		<p>
+			Atendemos solicitações comerciais pelo WhatsApp. Para enviar currículo, use a
+			página <a href="/trabalhe-conosco/">Trabalhe Conosco</a>.
+		</p>
+
+		<WhatsAppCTA
+			message="Olá, gostaria de solicitar um orçamento de terceirização."
+			label="Solicitar orçamento pelo WhatsApp"
+		/>
+
+		<div class="info">
+			<h2>Endereço</h2>
+			<address>{address.full}</address>
+
+			<h2>Redes sociais</h2>
+			<ul class="social-links">
+				<li><a href={social.facebook} target="_blank" rel="noopener noreferrer">Facebook</a></li>
+				<li><a href={social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
+				<li><a href={social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+			</ul>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.contato {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 3rem 1.25rem;
+	}
+
+	.info {
+		margin-top: 2.5rem;
+	}
+
+	.info address {
+		font-style: normal;
+	}
+
+	.social-links {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		gap: 1rem;
+	}
+</style>

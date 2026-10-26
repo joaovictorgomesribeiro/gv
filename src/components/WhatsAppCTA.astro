@@ -1,0 +1,43 @@
+---
+import { whatsappLink } from "../data/site";
+
+interface Props {
+	message: string;
+	label: string;
+	class?: string;
+}
+
+const { message, label, class: className = "" } = Astro.props;
+---
+
+<a
+	class={`whatsapp-cta ${className}`}
+	href={whatsappLink(message)}
+	target="_blank"
+	rel="noopener noreferrer"
+>
+	{label}
+</a>
+
+<style>
+	.whatsapp-cta {
+		display: inline-block;
+		padding: 0.85rem 1.75rem;
+		background-color: #1a7a4c;
+		color: #ffffff;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: 0.5rem;
+		transition: background-color 0.15s ease;
+	}
+
+	.whatsapp-cta:hover,
+	.whatsapp-cta:focus-visible {
+		background-color: #15603c;
+	}
+
+	.whatsapp-cta:focus-visible {
+		outline: 3px solid #0b3d24;
+		outline-offset: 2px;
+	}
+</style>
