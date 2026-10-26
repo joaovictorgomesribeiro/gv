@@ -1,0 +1,83 @@
+---
+import { address, cnpj, email, siteName } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const lastUpdated = "outubro de 2026";
+---
+
+<BaseLayout
+	title="Política de Privacidade | GV Soluções Empresariais"
+	description="Como a GV Soluções Empresariais trata os dados pessoais recebidos por WhatsApp, conforme a Lei Geral de Proteção de Dados (LGPD)."
+>
+	<section class="politica">
+		<h1>Política de Privacidade</h1>
+		<p class="updated">Última atualização: {lastUpdated}.</p>
+
+		<p>
+			Esta política explica como a {siteName} (CNPJ {cnpj}, {address.full}) trata os
+			dados pessoais de quem entra em contato por este site, em conformidade com a Lei
+			Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).
+		</p>
+
+		<h2>Cookies</h2>
+		<p>
+			Este site é estático e não utiliza cookies de rastreamento, formulários próprios
+			ou ferramentas de análise que armazenem dados do visitante no navegador.
+		</p>
+
+		<h2>Quais dados coletamos</h2>
+		<p>
+			Não coletamos dados diretamente pelo site. Os botões de contato abrem uma
+			conversa no WhatsApp, onde você decide quais informações enviar — normalmente
+			nome, telefone e, no caso de candidaturas pela página Trabalhe Conosco,
+			currículo. Essa conversa é processada pelo WhatsApp/Meta, conforme a política de
+			privacidade do próprio aplicativo.
+		</p>
+
+		<h2>Finalidade do tratamento</h2>
+		<p>
+			Usamos os dados recebidos para responder a solicitações comerciais (orçamentos) e
+			para avaliar candidaturas em processos seletivos.
+		</p>
+
+		<h2>Base legal</h2>
+		<p>
+			O tratamento ocorre com base no consentimento do titular, manifestado ao iniciar
+			voluntariamente uma conversa pelo WhatsApp.
+		</p>
+
+		<h2>Compartilhamento</h2>
+		<p>Não compartilhamos os dados recebidos com terceiros para fins de marketing.</p>
+
+		<h2>Retenção de currículos</h2>
+		<p>
+			Currículos recebidos para processos seletivos são mantidos por até 12 meses,
+			findos os quais são descartados.
+		</p>
+
+		<h2>Seus direitos</h2>
+		<p>
+			Conforme a LGPD, você pode solicitar a qualquer momento a confirmação, o acesso,
+			a correção ou a exclusão dos seus dados, além de informações sobre o
+			compartilhamento. Para exercer esses direitos, entre em contato pelo e-mail{" "}
+			<a href={`mailto:${email}`}>{email}</a>.
+		</p>
+	</section>
+</BaseLayout>
+
+<style>
+	.politica {
+		max-width: 750px;
+		margin: 0 auto;
+		padding: 3rem 1.25rem;
+	}
+
+	.updated {
+		color: #666;
+		font-size: 0.9rem;
+	}
+
+	.politica h2 {
+		margin-top: 2rem;
+	}
+</style>
