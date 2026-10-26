@@ -1,6 +1,6 @@
 ---
 import WhatsAppCTA from "../components/WhatsAppCTA.astro";
-import { address, social } from "../data/site";
+import { address, businessHours, cnpj, email, social } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
@@ -23,6 +23,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<div class="info">
 			<h2>Endereço</h2>
 			<address>{address.full}</address>
+
+			<h2>Horário de atendimento</h2>
+			<p>{businessHours.label}</p>
+
+			<h2>E-mail</h2>
+			<p><a href={`mailto:${email}`}>{email}</a></p>
+
+			<h2>CNPJ</h2>
+			<p>{cnpj}</p>
 
 			<h2>Redes sociais</h2>
 			<ul class="social-links">

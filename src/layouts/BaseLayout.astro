@@ -1,7 +1,7 @@
 ---
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import { address, siteName, social, telephoneE164 } from "../data/site";
+import { address, businessHours, cnpj, email, siteName, social, telephoneE164 } from "../data/site";
 
 interface Props {
 	title: string;
@@ -11,14 +11,14 @@ interface Props {
 const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// Schema incompleto até confirmarmos CNPJ (taxID), e-mail e horário de
-// atendimento (openingHoursSpecification) — ver src/data/site.ts.
 const localBusinessSchema = {
 	"@context": "https://schema.org",
 	"@type": "LocalBusiness",
 	name: siteName,
 	url: Astro.site?.toString(),
 	telephone: telephoneE164,
+	email,
+	taxID: cnpj,
 	address: {
 		"@type": "PostalAddress",
 		streetAddress: `${address.street}, ${address.district}`,
@@ -26,6 +26,12 @@ const localBusinessSchema = {
 		addressRegion: address.state,
 		postalCode: address.zip,
 		addressCountry: "BR",
+	},
+	openingHoursSpecification: {
+		"@type": "OpeningHoursSpecification",
+		dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+		opens: businessHours.opens,
+		closes: businessHours.closes,
 	},
 	sameAs: [social.facebook, social.instagram, social.linkedin],
 };
