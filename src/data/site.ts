@@ -1,6 +1,10 @@
 export const siteName = "GV Soluções Empresariais";
 
 export const whatsappNumber = "5534992240937"; // +55 34 9224-0937, usado para todo contato (comercial e Trabalhe Conosco)
+export const telephoneE164 = "+5534992240937";
+
+// Pendentes: CNPJ, e-mail comercial e horário de atendimento — aguardando confirmação
+// para completar o schema LocalBusiness (taxID, email, openingHoursSpecification).
 
 export const address = {
 	street: "Rua São Paulo, 1053 – Sala 03",
