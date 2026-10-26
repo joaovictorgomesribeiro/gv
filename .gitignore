@@ -25,3 +25,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# materiais de design brutos (contém credenciais de hospedagem e arquivos fonte
+# .psd/.docx que não devem ir para o repositório); ativos finais já processados
+# vivem em public/images
+materiais gv/

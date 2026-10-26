@@ -1,0 +1,41 @@
+---
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="pending-placeholder" role="note">
+	<span class="pending-badge">A definir</span>
+	<p>{label}</p>
+</div>
+
+<style>
+	.pending-placeholder {
+		border: 1px dashed #9a9a9a;
+		border-radius: 0.75rem;
+		background-color: #f1f1f1;
+		color: #555;
+		padding: 1.5rem;
+		text-align: center;
+	}
+
+	.pending-badge {
+		display: inline-block;
+		margin-bottom: 0.5rem;
+		padding: 0.2rem 0.6rem;
+		border-radius: 999px;
+		background-color: #d8d8d8;
+		color: #333;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.pending-placeholder p {
+		margin: 0;
+		font-size: 0.9rem;
+	}
+</style>

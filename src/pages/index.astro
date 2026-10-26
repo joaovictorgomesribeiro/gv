@@ -1,4 +1,5 @@
 ---
+import PendingPlaceholder from "../components/PendingPlaceholder.astro";
 import WhatsAppCTA from "../components/WhatsAppCTA.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -164,10 +165,30 @@ const beneficios = [
 
 	<section class="portfolio" id="portfolio">
 		<h2>Portfólio</h2>
-		<p class="portfolio-pending">
+		<p class="section-intro">
 			Esta seção está em atualização: em breve traremos cases reais, números e
 			depoimentos de clientes.
 		</p>
+
+		<h3 class="portfolio-subtitle">Números</h3>
+		<ul class="card-grid">
+			<li><PendingPlaceholder label="Anos de atuação" /></li>
+			<li><PendingPlaceholder label="Clientes atendidos" /></li>
+			<li><PendingPlaceholder label="Profissionais alocados" /></li>
+		</ul>
+
+		<h3 class="portfolio-subtitle">Cases</h3>
+		<ul class="card-grid">
+			<li><PendingPlaceholder label="Case de logística interna" /></li>
+			<li><PendingPlaceholder label="Case de produção" /></li>
+			<li><PendingPlaceholder label="Case de outro setor atendido" /></li>
+		</ul>
+
+		<h3 class="portfolio-subtitle">Depoimentos</h3>
+		<ul class="card-grid">
+			<li><PendingPlaceholder label="Depoimento de cliente 1" /></li>
+			<li><PendingPlaceholder label="Depoimento de cliente 2" /></li>
+		</ul>
 	</section>
 
 	<section class="cta-final">
@@ -238,9 +259,13 @@ const beneficios = [
 		}
 	}
 
-	.portfolio-pending {
+	.section-intro {
 		color: #555;
 		font-style: italic;
+	}
+
+	.portfolio-subtitle {
+		margin-top: 2rem;
 	}
 
 	.cta-final {
