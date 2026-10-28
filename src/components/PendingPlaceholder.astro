@@ -14,7 +14,7 @@ const { label } = Astro.props;
 <style>
 	.pending-placeholder {
 		border: 1px dashed #9a9a9a;
-		border-radius: 0.75rem;
+		border-radius: var(--radius-sm);
 		background-color: #f1f1f1;
 		color: #555;
 		padding: 1.5rem;
@@ -25,17 +25,15 @@ const { label } = Astro.props;
 		display: inline-block;
 		margin-bottom: 0.5rem;
 		padding: 0.2rem 0.6rem;
-		border-radius: 999px;
+		border-radius: var(--radius-sm);
 		background-color: #d8d8d8;
 		color: #333;
-		font-size: 0.75rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
+		font-size: var(--text-sm);
+		font-weight: var(--weight-semibold);
 	}
 
 	.pending-placeholder p {
 		margin: 0;
-		font-size: 0.9rem;
+		font-size: var(--text-sm);
 	}
 </style>

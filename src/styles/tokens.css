@@ -1,0 +1,43 @@
+/*
+ * Design tokens — extraídos da marca real da GV Soluções Empresariais:
+ * laranja e navy vêm do CSS em produção (gvsolucoesempresariais.com.br/
+ * wp-content/themes/v2/css/main.css); Poppins é a fonte carregada no
+ * site atual via Google Fonts.
+ */
+:root {
+	/* Cor */
+	--color-orange-500: #f26836; /* laranja de marca puro — só uso decorativo (ícones, linha ativa) */
+	--color-orange-600: #c94d1c; /* versão escurecida p/ texto e botões — passa WCAG AA (4.5:1) em branco */
+	--color-orange-700: #a83e14; /* hover/estado ativo de botão */
+	--color-orange-100: #fde8dd;
+	--color-navy-900: #13213c;
+	--color-navy-700: #263657;
+	--color-white: #ffffff;
+	--color-gray-50: #f5f5f5;
+	--color-gray-100: #f2f2f2;
+	--color-gray-300: #d9d9d9;
+	--color-gray-700: #333333;
+
+	/* Tipografia */
+	--font-sans: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-md: 1.125rem;
+	--text-lg: 1.375rem;
+	--text-xl: 1.75rem;
+	--text-2xl: 2.25rem;
+	--text-3xl: 2.75rem;
+
+	--weight-regular: 400;
+	--weight-medium: 500;
+	--weight-semibold: 600;
+	--weight-bold: 700;
+	--weight-extrabold: 800;
+
+	/* Layout */
+	--radius-sm: 4px;
+	--radius-md: 6px;
+	--border-hairline: 1px solid var(--color-gray-300);
+	--content-width: 1120px;
+}
