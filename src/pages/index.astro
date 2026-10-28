@@ -55,45 +55,35 @@ const setores = [
 	{
 		title: "Logística Interna",
 		items: [
-			{ label: "Carregamento e descarregamento de caminhões", icon: "logistica-carga-e-descarga" },
-			{ label: "Picking e conferência de pedidos", icon: "logistica-picking" },
-			{
-				label: "Conferência de recebimento e expedição",
-				icon: "logistica-conferencia-recebimento-expedicao",
-			},
-			{ label: "Processamento de pedidos", icon: "logistica-processamento-pedidos" },
-			{ label: "Transporte interno", icon: "logistica-transporte-interno" },
-			{ label: "Armazenagem e movimentação", icon: "logistica-movimentacao-armazenagem" },
-			{ label: "Gestão de estoque", icon: "logistica-gestao-estoques" },
-			{ label: "Gestão de almoxarifado e depósito", icon: "logistica-gestao-armazenagem" },
-			{ label: "Embalagem (packing)", icon: "logistica-packing" },
+			"Carregamento e descarregamento de caminhões",
+			"Picking e conferência de pedidos",
+			"Conferência de recebimento e expedição",
+			"Processamento de pedidos",
+			"Transporte interno",
+			"Armazenagem e movimentação",
+			"Gestão de estoque",
+			"Gestão de almoxarifado e depósito",
+			"Embalagem (packing)",
 		],
 	},
 	{
 		title: "Produção",
 		items: [
-			{ label: "Gerente de produção", icon: "producao-gerente" },
-			{ label: "Operador de máquina", icon: "producao-operador-maquinas" },
-			{ label: "Operador de empilhadeira", icon: "producao-operador-empilhadeira" },
-			{ label: "Auxiliar de produção", icon: "producao-auxiliar-producao" },
-			{ label: "Conferente de carga", icon: "producao-conferente-carga" },
-			{ label: "Auxiliar de armazém", icon: "producao-auxiliar-armazem" },
-			{ label: "Apontador de produção", icon: "producao-apontador" },
-			{ label: "Supervisor de linha", icon: "producao-supervisor-linha" },
-			{ label: "Analista de PCP", icon: "producao-analista-pcp" },
-			{
-				label: "Operador de movimentação e armazenagem",
-				icon: "producao-operador-movimentacao-armazenagem",
-			},
+			"Gerente de produção",
+			"Operador de máquina",
+			"Operador de empilhadeira",
+			"Auxiliar de produção",
+			"Conferente de carga",
+			"Auxiliar de armazém",
+			"Apontador de produção",
+			"Supervisor de linha",
+			"Analista de PCP",
+			"Operador de movimentação e armazenagem",
 		],
 	},
 	{
 		title: "Outras Atividades",
-		items: [
-			{ label: "Atividades administrativas", icon: "outras-atividades-administrativas" },
-			{ label: "Medicina do trabalho", icon: "outras-medicina-trabalho" },
-			{ label: "Segurança do trabalho", icon: "outras-seguranca-trabalho" },
-		],
+		items: ["Atividades administrativas", "Medicina do trabalho", "Segurança do trabalho"],
 	},
 ];
 
@@ -159,16 +149,7 @@ const beneficios = [
 						<h3>{setor.title}</h3>
 						<ul class="setor-items">
 							{setor.items.map((item) => (
-								<li>
-									<img
-										src={`/images/icons/${item.icon}.webp`}
-										alt=""
-										width="40"
-										height="40"
-										loading="lazy"
-									/>
-									<span>{item.label}</span>
-								</li>
+								<li>{item}</li>
 							))}
 						</ul>
 					</div>
@@ -256,10 +237,18 @@ const beneficios = [
 		color: var(--color-gray-100);
 	}
 
-	.servicos,
 	.beneficios {
 		background-color: var(--color-gray-50);
 		border-radius: var(--radius-md);
+	}
+
+	.servicos {
+		background-color: var(--color-navy-900);
+		border-radius: var(--radius-md);
+	}
+
+	.servicos h2 {
+		color: var(--color-white);
 	}
 
 	.beneficios-list {
@@ -338,17 +327,23 @@ const beneficios = [
 		padding: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
 	}
 
 	.setor-items li {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
+		position: relative;
+		padding: 0.6rem 0 0.6rem 1.25rem;
+		border-bottom: 1px solid var(--color-gray-300);
 	}
 
-	.setor-items img {
-		flex-shrink: 0;
+	.setor-items li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 1.15rem;
+		width: 0.5rem;
+		height: 0.5rem;
+		background-color: var(--color-orange-500);
+		border-radius: 2px;
 	}
 
 	@media (min-width: 800px) {
