@@ -179,8 +179,8 @@ const beneficios = [
 
 	<section class="beneficios">
 		<h2>Benefícios da terceirização</h2>
-		<ul class="card-grid">
-			{beneficios.map((item) => <li class="card">{item}</li>)}
+		<ul class="beneficios-list">
+			{beneficios.map((item) => <li>{item}</li>)}
 		</ul>
 	</section>
 
@@ -260,6 +260,38 @@ const beneficios = [
 	.beneficios {
 		background-color: var(--color-gray-50);
 		border-radius: var(--radius-md);
+	}
+
+	.beneficios-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 0.25rem 2.5rem;
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 700px) {
+		.beneficios-list {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	.beneficios-list li {
+		position: relative;
+		padding: 0.85rem 0 0.85rem 1.75rem;
+		border-bottom: 1px solid var(--color-gray-300);
+	}
+
+	.beneficios-list li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 1.4rem;
+		width: 0.65rem;
+		height: 0.65rem;
+		background-color: var(--color-orange-500);
+		border-radius: 2px;
 	}
 
 	.card-grid {

@@ -88,8 +88,8 @@ const currentPath = Astro.url.pathname;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.5rem;
-		height: 2.5rem;
+		width: 2.75rem;
+		height: 2.75rem;
 		background: none;
 		border: var(--border-hairline);
 		border-radius: var(--radius-sm);
@@ -104,6 +104,7 @@ const currentPath = Astro.url.pathname;
 		height: 2px;
 		background-color: var(--color-navy-900);
 		position: relative;
+		transition: transform 0.2s ease, opacity 0.2s ease;
 	}
 
 	.nav-toggle-icon::before {
@@ -118,27 +119,53 @@ const currentPath = Astro.url.pathname;
 		top: 6px;
 	}
 
+	.nav-toggle[aria-expanded="true"] .nav-toggle-icon {
+		background-color: transparent;
+	}
+
+	.nav-toggle[aria-expanded="true"] .nav-toggle-icon::before {
+		top: 0;
+		transform: rotate(45deg);
+	}
+
+	.nav-toggle[aria-expanded="true"] .nav-toggle-icon::after {
+		top: 0;
+		transform: rotate(-45deg);
+	}
+
 	.primary-nav {
-		display: none;
+		display: grid;
+		grid-template-rows: 0fr;
 		width: 100%;
+		transition: grid-template-rows 0.25s ease;
+	}
+
+	.primary-nav > ul {
+		overflow: hidden;
 	}
 
 	.primary-nav.is-open {
-		display: block;
+		grid-template-rows: 1fr;
 	}
 
 	.primary-nav ul {
 		list-style: none;
-		margin: 1rem 0 0;
+		margin: 0;
 		padding: 0;
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
 	}
 
+	.primary-nav.is-open ul {
+		margin-top: 1rem;
+	}
+
 	.primary-nav a {
-		display: block;
-		padding: 0.6rem 0.25rem;
+		display: flex;
+		align-items: center;
+		min-height: 44px;
+		padding: 0.5rem 0.25rem;
 		color: var(--color-navy-900);
 		text-decoration: none;
 		font-weight: var(--weight-medium);
@@ -166,6 +193,10 @@ const currentPath = Astro.url.pathname;
 			width: auto;
 		}
 
+		.primary-nav > ul {
+			overflow: visible;
+		}
+
 		.primary-nav ul {
 			flex-direction: row;
 			align-items: center;
@@ -173,8 +204,22 @@ const currentPath = Astro.url.pathname;
 			margin: 0;
 		}
 
+		.primary-nav.is-open ul {
+			margin-top: 0;
+		}
+
 		.primary-nav a {
+			min-height: auto;
 			padding: 0.25rem 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.primary-nav,
+		.nav-toggle-icon,
+		.nav-toggle-icon::before,
+		.nav-toggle-icon::after {
+			transition: none;
 		}
 	}
 </style>

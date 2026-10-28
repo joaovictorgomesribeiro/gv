@@ -84,17 +84,21 @@ const faqSchema = {
 	.faq-item {
 		border: var(--border-hairline);
 		border-radius: var(--radius-sm);
-		padding: 1rem 1.25rem;
 	}
 
 	.faq-item summary {
 		cursor: pointer;
+		display: flex;
+		align-items: center;
+		min-height: 44px;
+		padding: 0.85rem 1.25rem;
 		font-weight: var(--weight-semibold);
 		color: var(--color-navy-900);
 	}
 
 	.faq-item p {
-		margin: 0.75rem 0 0;
+		margin: 0;
+		padding: 0 1.25rem 1rem;
 		color: var(--color-gray-700);
 	}
 
