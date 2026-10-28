@@ -1,0 +1,65 @@
+---
+import WhatsAppCTA from "../components/WhatsAppCTA.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title="Página não encontrada | GV Soluções Empresariais"
+	description="A página que você procura não existe ou foi movida."
+>
+	<section class="not-found">
+		<p class="eyebrow">Erro 404</p>
+		<h1>Essa página não existe</h1>
+		<p>
+			O endereço que você tentou acessar não existe mais ou foi movido. Volte para a
+			home ou fale com a gente pelo WhatsApp.
+		</p>
+		<div class="actions">
+			<a class="home-link" href="/">Voltar para a home</a>
+			<WhatsAppCTA
+				message="Olá, não encontrei o que procurava no site."
+				label="Falar pelo WhatsApp"
+			/>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.not-found {
+		max-width: 700px;
+		margin: 0 auto;
+		padding: 5rem 1.25rem;
+		text-align: center;
+	}
+
+	.eyebrow {
+		color: var(--color-orange-600);
+		font-weight: var(--weight-semibold);
+		margin: 0 0 0.5rem;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+		margin-top: 2rem;
+	}
+
+	.home-link {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.85rem 1.75rem;
+		border: var(--border-hairline);
+		border-radius: var(--radius-sm);
+		color: var(--color-navy-900);
+		text-decoration: none;
+		font-weight: var(--weight-semibold);
+	}
+
+	.home-link:hover,
+	.home-link:focus-visible {
+		border-color: var(--color-orange-600);
+		color: var(--color-orange-600);
+	}
+</style>

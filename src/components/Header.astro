@@ -19,34 +19,64 @@ const currentPath = Astro.url.pathname;
 			<span class="sr-only">Abrir menu</span>
 			<span class="nav-toggle-icon" aria-hidden="true"></span>
 		</button>
-
-		<nav id="primary-nav" class="primary-nav" aria-label="Navegação principal">
-			<ul>
-				{
-					navItems.map((item) => (
-						<li>
-							<a
-								href={item.href}
-								aria-current={currentPath === item.href ? "page" : undefined}
-							>
-								{item.label}
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</nav>
 	</div>
+
+	<nav id="primary-nav" class="primary-nav" aria-label="Navegação principal">
+		<ul>
+			{
+				navItems.map((item) => (
+					<li>
+						<a
+							href={item.href}
+							aria-current={currentPath === item.href ? "page" : undefined}
+						>
+							{item.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+
+	<button type="button" id="nav-backdrop" class="nav-backdrop" tabindex="-1" aria-hidden="true">
+		<span class="sr-only">Fechar menu</span>
+	</button>
 </header>
 
 <script>
 	const toggle = document.getElementById("nav-toggle");
 	const nav = document.getElementById("primary-nav");
+	const backdrop = document.getElementById("nav-backdrop");
+
+	function closeMenu() {
+		toggle?.setAttribute("aria-expanded", "false");
+		nav?.classList.remove("is-open");
+		document.body.classList.remove("nav-open");
+	}
+
+	function openMenu() {
+		toggle?.setAttribute("aria-expanded", "true");
+		nav?.classList.add("is-open");
+		document.body.classList.add("nav-open");
+	}
 
 	toggle?.addEventListener("click", () => {
 		const expanded = toggle.getAttribute("aria-expanded") === "true";
-		toggle.setAttribute("aria-expanded", String(!expanded));
-		nav?.classList.toggle("is-open");
+		if (expanded) {
+			closeMenu();
+		} else {
+			openMenu();
+		}
+	});
+
+	backdrop?.addEventListener("click", closeMenu);
+
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Escape") closeMenu();
+	});
+
+	nav?.addEventListener("click", (event) => {
+		if ((event.target as HTMLElement).tagName === "A") closeMenu();
 	});
 </script>
 
@@ -64,21 +94,26 @@ const currentPath = Astro.url.pathname;
 	}
 
 	.site-header {
-		border-bottom: var(--border-hairline);
+		position: relative;
 		background-color: var(--color-white);
 	}
 
 	.bar {
+		position: relative;
+		z-index: 70;
 		max-width: var(--content-width);
 		margin: 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding: 1rem 1.25rem;
+		border-bottom: var(--border-hairline);
+		background-color: var(--color-white);
 	}
 
 	.brand {
-		font-weight: var(--weight-bold);
+		font-family: var(--font-serif);
+		font-weight: var(--weight-semibold);
 		font-size: var(--text-md);
 		color: var(--color-navy-900);
 		text-decoration: none;
@@ -137,7 +172,14 @@ const currentPath = Astro.url.pathname;
 		display: grid;
 		grid-template-rows: 0fr;
 		width: 100%;
-		transition: grid-template-rows 0.25s ease;
+		background-color: var(--color-white);
+		border-bottom: 0 solid var(--color-gray-300);
+		box-shadow: 0 12px 20px -8px rgba(19, 33, 60, 0.18);
+		transition:
+			grid-template-rows 0.25s ease,
+			border-bottom-width 0.25s ease;
+		position: relative;
+		z-index: 60;
 	}
 
 	.primary-nav > ul {
@@ -146,19 +188,23 @@ const currentPath = Astro.url.pathname;
 
 	.primary-nav.is-open {
 		grid-template-rows: 1fr;
+		border-bottom-width: 1px;
 	}
 
 	.primary-nav ul {
 		list-style: none;
 		margin: 0;
-		padding: 0;
+		padding: 0 1.25rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
+		max-width: var(--content-width);
+		margin-inline: auto;
 	}
 
 	.primary-nav.is-open ul {
-		margin-top: 1rem;
+		padding-top: 0.5rem;
+		padding-bottom: 1rem;
 	}
 
 	.primary-nav a {
@@ -170,6 +216,25 @@ const currentPath = Astro.url.pathname;
 		text-decoration: none;
 		font-weight: var(--weight-medium);
 		border-bottom: 2px solid transparent;
+	}
+
+	.nav-backdrop {
+		display: none;
+		position: fixed;
+		inset: 0;
+		border: 0;
+		padding: 0;
+		background-color: rgba(19, 33, 60, 0.45);
+		z-index: 50;
+		cursor: default;
+	}
+
+	body.nav-open .nav-backdrop {
+		display: block;
+	}
+
+	body.nav-open {
+		overflow: hidden;
 	}
 
 	.primary-nav a:hover,
@@ -184,13 +249,39 @@ const currentPath = Astro.url.pathname;
 	}
 
 	@media (min-width: 900px) {
+		.site-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			max-width: var(--content-width);
+			margin: 0 auto;
+			padding: 0 1.25rem;
+			border-bottom: var(--border-hairline);
+		}
+
+		.bar {
+			flex: 0 0 auto;
+			max-width: none;
+			margin: 0;
+			padding: 1rem 0;
+			border-bottom: 0;
+		}
+
 		.nav-toggle {
 			display: none;
 		}
 
+		.nav-backdrop {
+			display: none !important;
+		}
+
 		.primary-nav {
 			display: block;
+			grid-template-rows: unset;
 			width: auto;
+			box-shadow: none;
+			background: none;
+			z-index: auto;
 		}
 
 		.primary-nav > ul {
@@ -202,10 +293,12 @@ const currentPath = Astro.url.pathname;
 			align-items: center;
 			gap: 1.5rem;
 			margin: 0;
+			padding: 0;
+			max-width: none;
 		}
 
 		.primary-nav.is-open ul {
-			margin-top: 0;
+			padding: 0;
 		}
 
 		.primary-nav a {

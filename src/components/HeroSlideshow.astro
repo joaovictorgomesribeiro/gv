@@ -1,0 +1,218 @@
+---
+interface Slide {
+	src: string;
+	alt: string;
+}
+
+interface Props {
+	slides?: Slide[];
+	placeholderLabels?: string[];
+}
+
+const {
+	slides = [],
+	placeholderLabels = ["Equipe em operação", "Logística interna", "Produção e segurança"],
+} = Astro.props;
+
+const hasRealSlides = slides.length > 0;
+const count = hasRealSlides ? slides.length : placeholderLabels.length;
+---
+
+<div class="hero-slideshow" id="hero-slideshow" role="group" aria-label="Fotos da operação GV" aria-roledescription="carrossel">
+	<div class="hero-slides">
+		{
+			hasRealSlides
+				? slides.map((slide, i) => (
+						<img
+							src={slide.src}
+							alt={slide.alt}
+							class="hero-slide"
+							data-index={i}
+							loading={i === 0 ? "eager" : "lazy"}
+						/>
+					))
+				: placeholderLabels.map((label, i) => (
+						<div class="hero-slide hero-slide-placeholder" data-index={i}>
+							<span>Foto pendente — {label}</span>
+						</div>
+					))
+		}
+		<div class="hero-scrim" aria-hidden="true"></div>
+	</div>
+
+	{
+		count > 1 && (
+			<div class="hero-dots" role="tablist" aria-label="Selecionar foto">
+				{Array.from({ length: count }).map((_, i) => (
+					<button
+						type="button"
+						class="hero-dot"
+						data-index={i}
+						role="tab"
+						aria-selected={i === 0 ? "true" : "false"}
+						aria-label={`Foto ${i + 1} de ${count}`}
+					/>
+				))}
+			</div>
+		)
+	}
+
+	<p class="sr-only" id="hero-slide-status" aria-live="polite" />
+</div>
+
+<script>
+	const root = document.getElementById("hero-slideshow");
+	if (root) {
+		const slides = Array.from(root.querySelectorAll<HTMLElement>(".hero-slide"));
+		const dots = Array.from(root.querySelectorAll<HTMLButtonElement>(".hero-dot"));
+		const status = document.getElementById("hero-slide-status");
+		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+		let current = 0;
+		let timer: ReturnType<typeof setInterval> | undefined;
+
+		function show(index: number) {
+			current = (index + slides.length) % slides.length;
+			slides.forEach((slide, i) => slide.classList.toggle("is-active", i === current));
+			dots.forEach((dot, i) => dot.setAttribute("aria-selected", String(i === current)));
+			if (status) status.textContent = `Foto ${current + 1} de ${slides.length}`;
+		}
+
+		function next() {
+			show(current + 1);
+		}
+
+		function start() {
+			if (prefersReducedMotion || slides.length < 2) return;
+			stop();
+			timer = setInterval(next, 5000);
+		}
+
+		function stop() {
+			if (timer) clearInterval(timer);
+		}
+
+		dots.forEach((dot) => {
+			dot.addEventListener("click", () => {
+				show(Number(dot.dataset.index));
+				start();
+			});
+		});
+
+		root.addEventListener("mouseenter", stop);
+		root.addEventListener("mouseleave", start);
+		root.addEventListener("focusin", stop);
+		root.addEventListener("focusout", start);
+
+		show(0);
+		start();
+	}
+</script>
+
+<style>
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.hero-slideshow {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+	}
+
+	.hero-slides {
+		position: absolute;
+		inset: 0;
+	}
+
+	.hero-slide {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0;
+		transition: opacity 1s ease;
+	}
+
+	.hero-slide.is-active {
+		opacity: 1;
+	}
+
+	.hero-slide-placeholder {
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-start;
+		padding: 1.5rem;
+		background: linear-gradient(135deg, var(--color-navy-700), var(--color-navy-900));
+		border: 1px dashed rgba(255, 255, 255, 0.25);
+	}
+
+	.hero-slide-placeholder span {
+		color: rgba(255, 255, 255, 0.55);
+		font-size: var(--text-sm);
+	}
+
+	.hero-scrim {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			180deg,
+			rgba(19, 21, 33, 0.78) 0%,
+			rgba(19, 33, 60, 0.72) 55%,
+			rgba(19, 33, 60, 0.85) 100%
+		);
+	}
+
+	.hero-dots {
+		position: absolute;
+		left: 50%;
+		bottom: 0.75rem;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 0.25rem;
+		z-index: 2;
+	}
+
+	.hero-dot {
+		width: 1.5rem;
+		height: 1.5rem;
+		padding: 0;
+		border: 0;
+		background: none;
+		cursor: pointer;
+		position: relative;
+	}
+
+	.hero-dot::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 255, 255, 0.6);
+		background-color: rgba(255, 255, 255, 0.25);
+	}
+
+	.hero-dot[aria-selected="true"]::before {
+		background-color: var(--color-orange-500);
+		border-color: var(--color-orange-500);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-slide {
+			transition: none;
+		}
+	}
+</style>
